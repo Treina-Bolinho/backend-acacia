@@ -15,55 +15,79 @@
 #### Ativar venv:
     source myvenv/bin/activate
 
-    após a instalar e ativar a virtual env o 
-    comando pip já vai estar ativo.
-
 #### Com a virtual env ativada:
     
-    instalar Django e DjangoRestFramework 
-        - pip instal django
-        - pip install djangorestframework
+    - instalar Django e DjangoRestFramework 
+        >> pip instal django
+        >> pip install djangorestframework
     
-        - Criar novo projeto django com nome acacia_api: 
-        django-admin startproject acacia_api .
-
-    fluxo de trabalho 
+    - registrar o aplicatico rest_framework  em settings.py -> INSTALLED_APPS
     
-        - python manage.py makemigrations
-        - python manage.py migrate
-        - python manage.py runserver
+    - Criar novo projeto django com nome acacia_api: 
+        >> django-admin startproject acacia_api .
 
 
-    Criar superusuario:
-        python manage.py createsuperuser
-        admim: admim 
-        email address: teste@teste.com.br   
-        senha: 123456
+    - Sincronize o banco de dados pela primeira vez:
+       >> python manage.py makemigrations
 
-    - Criar api (dentro da pasta do projeto)
-        python manage.py startapp nome API 
+    - Criar superusuario:
+       >> python manage.py createsuperuser
+            admim: admim 
+            email address: teste@teste.com.br   
+            senha: 123456
+
+    - Criar APIs (na raiz do projeto (SRC))
+        >> python manage.py startapp nome API 
       
-    - Na pasta de cada API criar novo pacote python (nome api).
-        Dentro do pacote cria files (viewsets.py, serializers.py)
+    - No diretorio de cada API criar novo pacote python (nome api).
+        Dentro do pacote/diretorio (api) cria files (viewsets.py, serializers.py)
         
-    Adicionar API em INSTALLED_APPS em settings.py
-      * core:
-       -> criar os models com seus atributos (models.py)
-            class PontoTuristico(models.Model):
-                nome = models.CharField(max_length=150)
-                descricao = models.TextField()
-                aprovado = models.BooleanField(default=False)
+    - Incluir novo API em settings.py -> INSTALLED_APPS
+    -> Criar os models com seus atributos (models.py)
 
-                 def __str__(self):
-                    return self.nome
-                    
-       registrar model no admin (admin.py) 
+                   
+    -> Registrar model no admin (admin.py) 
             from.models import core
             admin.site.register(Atracao)
         
-       detro de core criar novo pacote python (nome api).
-       dentro de api cria files (viewsets.py, serializers.py) 
+    detro de core criar novo pacote python (nome api).
+    dentro de api cria files (viewsets.py, serializers.py) 
    
     
     depois de criar a outros pacotes de API
         Importar a as models e fazer os relacionamentos
+        
+    Fluxo de trabalho 
+       >> python manage.py makemigrations
+       >> python manage.py migrate
+       >> python manage.py runserver
+       
+       
+ -----------------------------------------------------------------      
+    #### **Automatizar a construção da API?**
+    
+    Utilizamos o projeto drf_generators com modificações para funcionar nas versões Django 2.x e DRF 3.9.
+    
+    Este projeto gera todas as Views, Serializers e as rotas (URLs) para a API a partir do Models.py do Django.
+    
+    1 — Instalação
+    
+    pip install drf-generators
+    
+    2 — Incluir o rest_framework e o drf_generators no settings.py
+    
+    INSTALLED_APPS = [
+     ‘django.contrib.admin’,
+     ‘django.contrib.auth’,
+     ‘django.contrib.contenttypes’,
+     ‘django.contrib.sessions’,
+     ‘django.contrib.messages’,
+     ‘django.contrib.staticfiles’,
+     ‘projeto’,
+     ‘rest_framework’,
+     ‘drf_generators’,
+    ]
+    
+    3— Executar o comando para a criação das Views, Serializers e URLs:
+    
+    python .\manage.py generate projeto
