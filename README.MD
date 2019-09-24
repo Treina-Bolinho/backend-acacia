@@ -1,4 +1,4 @@
-<p align="center">  <img src="img/acacia.svg" width="400"></p>
+<p align="center">  <img src="docs/img/acacia.svg" width="300"></p>
 
 ## TREINAMENTO ACACIA API
 
