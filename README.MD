@@ -1,4 +1,4 @@
-<p align="center">  <img src="img/wordmark_1.svg" width="400"></p>
+<p align="center">  <img src="img/acacia.svg" width="400"></p>
 
 ## TREINAMENTO ACACIA API
 
